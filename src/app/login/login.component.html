@@ -1,0 +1,56 @@
+<p>
+  login works!
+</p>
+
+<div class="container">
+  <form  #loginForm="ngForm"  (ngSubmit)="onSubmit(loginForm.value, loginForm.valid)">
+<div class="form-group row">
+  <label for="name" class="col-2 col-form-label">Name</label>
+  <div class="col-10">
+    <input  class="form-control" type="text"  id="name" required minlength="3" maxlength="16" name="name" [(ngModel)]="login.name" #name="ngModel">
+  </div>
+</div>
+
+
+<div *ngIf="name.errors && (name.dirty || name.touched)"
+           class="alert alert-danger">
+          <div [hidden]="!name.errors.required">
+            Name is required
+          </div>
+          <div [hidden]="!name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div [hidden]="!name.errors.maxlength">
+            Name cannot be more than 24 characters long.
+          </div>
+</div>
+
+
+
+<div class="form-group row">
+  <label for="example-password-input" class="col-2 col-form-label">Password</label>
+  <div class="col-10">
+    <input class="form-control" type="password" id="example-password-input" minlength="4" maxlength="24" required name="password" [(ngModel)]="login.password" #password="ngModel">
+  </div>
+</div>
+<div *ngIf="password.errors && (password.dirty || password.touched)"
+           class="alert alert-danger">
+          <div [hidden]="!password.errors.required">
+            password is required
+          </div>
+          <div [hidden]="!password.errors.minlength">
+            password must be at least 4 characters long.
+          </div>
+          <div [hidden]="!password.errors.maxlength">
+            password cannot be more than 24 characters long.
+          </div>
+</div>
+
+  <div class="form-group row">
+
+  <div class="col-10">
+    <input type="submit" class="btn">
+  </div>
+</div>
+    </form>
+  </div>
