@@ -12,14 +12,18 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private AuthService: AuthService, private route: Router) { }
-  login = {};
-  @Input('islogin') islogin: string;
-  // login form submit function
+
+  //decorator
+  //@Input('islogin') islogin: string;
+
+  //class member
+  public login = {};
+
+  // functions
   onSubmit(value, valid) {
-    let componentRef = this;
     if(valid){
-      this.AuthService.login(value.name, value.password, function(response){
-          componentRef.route.navigate(["/profile"]);
+      this.AuthService.login(value.name, value.password, (response) =>{
+          this.route.navigate(["/profile"]);
 
       });
     }

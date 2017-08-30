@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,29 @@ import {Router} from '@angular/router';
   providers: [AuthService]
 
 })
-export class AppComponent  {
+export class AppComponent {
+
+  constructor(private AuthService: AuthService, private route: Router, private activateRoute: ActivatedRoute) {
+    console.log('islogin', this.islogin);
+  }
+
+  // class members
   public title = 'app works!';
-  logout(){
-    this.AuthService.logout(() =>{
+  public islogin: boolean = this.AuthService.islogin();
+
+  // functions
+  logout() {
+    this.AuthService.logout(() => {
       this.route.navigate(["/"]);
     });
   }
 
-   public islogin:boolean = this.AuthService.islogin();
 
-  constructor(private AuthService: AuthService, private route: Router) {
-    console.log('islogin', this.islogin);
+  ngOnInit() {
+    // subscribe to router event
+    this.activateRoute.params.subscribe((params: Params) => {
+      let userId = params;
+      console.log(userId);
+    });
   }
 }
