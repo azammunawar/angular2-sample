@@ -11,13 +11,14 @@ export class FilterComponent implements OnInit {
   constructor(private shared: SharedServiceService) {
 
   }
-  // class member
-  public email: string = this.shared.data;
-  // functions
+  // class variables
+  public email: string = 'sdsd';
+
+  // class methods
   doSomething(value) {
     this.shared.update(value);
   }
-
+  // hooks
   ngOnInit() {
 
 

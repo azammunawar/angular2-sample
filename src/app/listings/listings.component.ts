@@ -1,7 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {SharedServiceService} from '../shared-service.service';
-import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 import 'rxjs/Rx';
 
 @Component({
@@ -10,19 +8,29 @@ import 'rxjs/Rx';
   styleUrls: ['./listings.component.css']
 })
 export class ListingsComponent implements OnInit {
-  @Input()
-  count;
+  // decorators
+  @Input() count;
+
+  @Output() change = new EventEmitter();
 
   constructor(private shared: SharedServiceService) {
+
   }
 
+  // class methods
   doSomethingNow() {
     this.email = this.shared.data;
   }
 
-  public email: string = this.shared.data;
+  upvote() {
+    this.count++;
+    this.change.emit(this.count);
+  }
 
+  // class variables
+  public email: string = 'azam';
 
+  // hooks
   ngOnInit() {
     console.log('count', this.count);
     this.shared.value

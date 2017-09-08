@@ -1,6 +1,6 @@
-import { TestBed, async } from '@angular/core/testing';
+import {TestBed, async} from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -29,4 +29,16 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('app works!');
   }));
+
+  it('should logout and return undefined ', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+
+    app.logout();
+
+    var auth = localStorage.getItem('auth');
+
+    expect(auth).toBeUndefined();
+  }));
+
 });

@@ -22,4 +22,16 @@ describe('ListingsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should increment and event emit when upvoted', () => {
+    let votecount = component.count;
+    component.change.subscribe((count)=>{
+        votecount++;
+    });
+
+    component.upvote();
+
+    expect(component.count).toEqual(votecount);
+  });
+
 });

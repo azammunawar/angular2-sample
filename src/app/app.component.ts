@@ -16,11 +16,11 @@ export class AppComponent {
     console.log('islogin', this.islogin);
   }
 
-  // class members
+  // class variables
   public title = 'app works!';
   public islogin: boolean = this.AuthService.islogin();
 
-  // functions
+  // class methods
   logout() {
     this.AuthService.logout(() => {
       this.route.navigate(["/"]);
@@ -28,6 +28,8 @@ export class AppComponent {
   }
 
 
+
+  // hooks
   ngOnInit() {
     // subscribe to router event
     this.activateRoute.params.subscribe((params: Params) => {
