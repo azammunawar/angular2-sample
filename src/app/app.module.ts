@@ -12,9 +12,11 @@ import {AuthService} from './auth.service';
 import { FilterComponent } from './filter/filter.component';
 import { ListingsComponent } from './listings/listings.component';
 import {SharedServiceService} from './shared-service.service';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard],},
 
 ];
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     LoginComponent,
     ProfileComponent,
     FilterComponent,
-    ListingsComponent
+    ListingsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
