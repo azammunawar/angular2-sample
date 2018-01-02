@@ -10,18 +10,24 @@ export class AuthService {
 
   constructor(private http:Http) { }
   dataArray: object = {};
-  public user = {email: '', password: ''};
-  login(username, password, callback) {
-    this.user.email = username;
-    this.user.password = password;
-    // headers set
-    let headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    let options = new RequestOptions({ headers: headers});
+  private serializeObj(obj) {
+    var result = [];
+    for (var property in obj)
+      result.push(encodeURIComponent(property) + "=" + encodeURIComponent(obj[property]));
 
+    return result.join("&");
+  }
+  login(username, password, callback) {
+
+    // headers set
+    var obj = { email: username, password:password };
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers});
+    let body = this.serializeObj(obj);
     // login request
-     this.http.post('http://localhost:8000/login', this.user, options).subscribe(data => {
+     this.http.post('http://localhost:4000/login', body, options).subscribe(data => {
        console.log('data', data);
-     })
+     });
 
 
     // this.http.get('http://localhost:8000/tasks',  options).subscribe(data => {
